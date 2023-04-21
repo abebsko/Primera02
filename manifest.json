@@ -1,0 +1,21 @@
+{
+  "name": "Primera Legal Case Manager",
+  "short_name": "Primera",
+  "start_url": "/primera02/index.php",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "images/icon/primera-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon/primera-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffd31d",
+  "background_color": "#333",
+  "display": "standalone"
+}
