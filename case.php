@@ -86,6 +86,7 @@ if (isset($_POST['newOrder'])) {
 
     <!-- Bootstrap CSS-->
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <!-- Vendor CSS-->
     <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
@@ -451,7 +452,6 @@ if (isset($_POST['newOrder'])) {
                                             <!-- Case Notes -->
                                             <div class="tab-pane fade" id="notes" role="tabpanel"
                                                 aria-labelledby="notes-tab">
-
                                                 <div class="row my-5">
                                                     <div class="col-md-12">
                                                         <div class="table-responsive">
@@ -492,7 +492,7 @@ if (isset($_POST['newOrder'])) {
                                                 <?php
                                                 if ($user['id'] == $case['manager'] && $case['matterStatus'] == 1) { ?>
                                                     <div class="row">
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-3 offset-9">
                                                             <div class="table-data__tool m-t-20">
                                                                 <div class="table-data__tool-right">
                                                                     <button type="button"
@@ -558,7 +558,8 @@ if (isset($_POST['newOrder'])) {
                                                                                                 data-placement="top"
                                                                                                 title="Mark Complete">
                                                                                                 <i class="zmdi zmdi-check"></i>
-                                                                                            </button></a>
+                                                                                            </button></a></td>
+                                                                                    <td>
                                                                                         <a href="case.php?case=<?php echo $case['matterId']; ?>&delTask=<?php echo $tid; ?>"
                                                                                             onclick='return confirm("Are you sure you want to delete?")'>
                                                                                             <button class="btn btn-danger btn-sm"
@@ -602,10 +603,8 @@ if (isset($_POST['newOrder'])) {
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-
                                                                     <?php
-                                                                    //display tasks                                                                
-                                                                    
+                                                                    //display tasks                                                           
                                                                     foreach ($tasks as $task) {
                                                                         $tid = $task['taskId'];
                                                                         $subject = $task['taskName'];
@@ -633,6 +632,8 @@ if (isset($_POST['newOrder'])) {
                                                                                                 <i
                                                                                                     class="zmdi zmdi-check-circle"></i>
                                                                                             </button></a>
+                                                                                    </td>
+                                                                                    <td>
                                                                                         <a href="case.php?case=<?php echo $case['matterId']; ?>&delTask=<?php echo $tid; ?>"
                                                                                             onclick='return confirm("Are you sure you want to delete?")'>
                                                                                             <button class="btn btn-danger btn-sm"
@@ -641,6 +642,8 @@ if (isset($_POST['newOrder'])) {
                                                                                                 <i class="zmdi zmdi-delete"></i>
                                                                                             </button> </a>
                                                                                     </td>
+
+
                                                                                 <?php } ?>
                                                                             </tr>
                                                                         <?php }
@@ -1250,30 +1253,10 @@ if (isset($_POST['newOrder'])) {
     <script src="vendor/circle-progress/circle-progress.min.js"></script>
     <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script> -->
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
+    <script src="vendor/select2/select2.min.js"></script>
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-    <script>
-        function togglePending() {
-            var element = document.getElementById("pending");
-            if (element.style.display = "block") {
-                element.style.display = "none";
-            } else {
-                element.style.display = "block";
-            }
-        }
-
-        function toggleCompleted() {
-            var element = document.getElementById("completed");
-            if (element.style.display = "block") {
-                element.style.display = "none";
-            } else {
-                element.style.display = "block";
-            }
-        }    
-    </script>
 
 </body>
 

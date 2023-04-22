@@ -128,7 +128,7 @@ if (isset($_POST['editCase'])) {
                     <img src="images/icon/primera.png" alt="Primera" />
                 </a>
             </div>
-            <div class="menu-sidebar__content js-scrollbar1">
+            <div class="menu-sidebar__content">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
