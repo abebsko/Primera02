@@ -122,7 +122,7 @@ function getOrders()
 function createCase()
 {
     global $db;
-    $matterId = $_POST["suitNo"];
+    $suitNo = $_POST["suitNo"];
     $caseTitle = $_POST["title"];
     $manager = $_POST["manager"];
     $court = $_POST["court"];
@@ -130,18 +130,18 @@ function createCase()
     $category = $_POST["category"];
     $caseSummary = $_POST["caseSummary"];
     $client = $_POST["client"];
-    $nHr = $_POST["hearingDate"];
-    $stage = $_POST["hearingStage"];
+    // $nHr = $_POST["hearingDate"];
+    // $stage = $_POST["hearingStage"];
 
     //check if matter is already registered.  
-    $checkCase = "SELECT matterId FROM matters WHERE matterId= '$matterId'";
+    $checkCase = "SELECT matterId FROM matters WHERE suitNo= '$suitNo'";
     $checkCaseResult = mysqli_query($db, $checkCase);
     if (mysqli_num_rows($checkCaseResult) > 0) {
-        echo "<script> alert('$matterId already exists') </script>";
+        echo "<script> alert('$suitNo already exists') </script>";
     } else {
-        //create new case and insert into two tables in one query
-        $insertCase = "INSERT INTO matters (matterId,title,manager,judge,court,caseSummary,client,category) 
-        VALUES('$matterId','$caseTitle','$manager','$judge', '$court','$caseSummary','$client','$category'); INSERT INTO hearings (matterId,nextHearingDate,stageOfNextHearing) VALUES('$matterId','$nHr','$stage');";
+        //create new case and insert 
+        $insertCase = "INSERT INTO matters (suitNo,title,manager,judge,court,caseSummary,client,category) 
+        VALUES('$suitNo','$caseTitle','$manager','$judge', '$court','$caseSummary','$client','$category')";
         if (mysqli_multi_query($db, $insertCase)) {
             header("Location: matters.php");
         } else {
@@ -163,7 +163,7 @@ function createHearing()
     $insert = "INSERT INTO hearings (matterId,lastHearingDate,nextHearingDate,stageOfNextHearing,notes) 
         VALUES('$matterId',' $lHr','$nHr','$stage',' $note')";
     if (mysqli_query($db, $insert)) {
-        // header("Location: case.php?case=$matterId");
+        header("Location: case.php?case=$matterId");
     } else {
         echo "<script> alert('Failed') </script>";
     }
@@ -182,7 +182,7 @@ function newTask()
     //create new task
     $sql = "INSERT INTO tasks (matterId,taskName,details,dueDate) VALUES('$matterId','$subject','$desc','$due')";
     if (mysqli_query($db, $sql)) {
-        //header("Location: case.php?case=$matterId");
+        header("Location: case.php?case=$matterId");
     } else {
         echo "<script> alert('Failed') </script>";
     }
@@ -303,7 +303,7 @@ function newOrder()
     //create new task
     $sql = "INSERT INTO orders (matterId,orderDesc,dateDelivered) VALUES('$matterId','$desc','$dateDelivered')";
     if (mysqli_query($db, $sql)) {
-        //header("Location: case.php?case=$matterId");
+        header("Location: case.php?case=$matterId");
     } else {
         echo "<script> alert('Failed') </script>";
     }
@@ -353,7 +353,7 @@ function editCase()
 {
     global $db;
     $caseid = $_POST["signpost"]; //old value
-    $matterId = $_POST["suitNo"]; //new value
+    $suitNo = $_POST["suitNo"]; //new value
     $caseTitle = $_POST["title"];
     $manager = $_POST["manager"];
     $court = $_POST["court"];
@@ -362,7 +362,7 @@ function editCase()
     $client = $_POST["client"];
     $caseSummary = $_POST["caseSummary"];
 
-    $updatesql = "UPDATE matters SET matterId = '$matterId',title = '$caseTitle', manager = '$manager', court = '$court', judge = '$judge', category = '$category', caseSummary = '$caseSummary', client = '$client' WHERE matterId = '$caseid'";
+    $updatesql = "UPDATE matters SET suitNo = '$suitNo',title = '$caseTitle', manager = '$manager', court = '$court', judge = '$judge', category = '$category', caseSummary = '$caseSummary', client = '$client' WHERE matterId = '$caseid'";
     $query = mysqli_query($db, $updatesql);
     if ($query) {
         header("Location:matters.php");
@@ -397,7 +397,6 @@ function deleteMattter()
 
     if ($deleteQueryResult) {
         header("Location: matters.php");
-        //  echo "<script> window.open('matters.php?deleted=matter has been deleted','_self') </script>";  
     } else {
         echo "<script> alert('Unsuccessful')</script>";
     }
@@ -431,7 +430,7 @@ function deleteHearing()
     $deleteQueryResult = mysqli_query($db, $deleteQuery);
 
     if ($deleteQueryResult) {
-        //header("Location: case.php?case=$caseid");
+        header("Location: case.php?case=$caseid");
         //  echo "<script> window.open('matters.php?deleted=matter has been deleted','_self') </script>";  
     } else {
         echo "<script> alert('Unsuccessful')</script>";
@@ -450,7 +449,7 @@ function deleteTask()
 
     if ($deleteQueryResult) {
         header("Location: case.php?case=$caseid");
-        //  echo "<script> window.open('matters.php?deleted=matter has been deleted','_self') </script>";  
+        // echo "<script> window.open('matters.php?deleted=matter has been deleted','_self') </script>";  
     } else {
         echo "<script> alert('Unsuccessful')</script>";
     }

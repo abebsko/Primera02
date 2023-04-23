@@ -335,7 +335,7 @@ if (isset($_POST['newOrder'])) {
                                                                 <tbody>
                                                                     <tr>
                                                                         <th width="40%">Suit Number</th>
-                                                                        <td> <?php echo $case['matterId'] ?></td>
+                                                                        <td> <?php echo $case['suitNo'] ?></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Judge</th>
@@ -943,7 +943,7 @@ if (isset($_POST['newOrder'])) {
                                             No</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <h5 class="form-control-static"><?php echo $case['matterId'] ?></h5>
+                                        <h5 class="form-control-static"><?php echo $case['suitNo'] ?></h5>
                                         <!-- <input type="text" id="text-input" name="suitNo" class="form-control"> -->
                                     </div>
                                 </div>
@@ -952,7 +952,9 @@ if (isset($_POST['newOrder'])) {
                                         <label for="lhearingDate" class=" form-control-label">Last Hearing Date</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="lhDate" class="form-control"
+                                        <!-- <input type="date" id="date-input" name="lhDate" class="form-control" Required
+                                            value=""> -->
+                                        <input type="text" id="text-input" name="lhDate" class="form-control" Required
                                             value="<?php echo date('d-m-Y', strtotime($lhDate['nextHearingDate'])); ?>">
                                     </div>
                                 </div>
@@ -962,7 +964,8 @@ if (isset($_POST['newOrder'])) {
                                             Date</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="date" id="date-input" name="nhearingDate" class="form-control">
+                                        <input type="date" id="date-input" name="nhearingDate" class="form-control"
+                                            Required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -970,7 +973,7 @@ if (isset($_POST['newOrder'])) {
                                         <label for="stage" class=" form-control-label">Stage of Next Hearing</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="stage" class="form-control">
+                                        <input type="text" id="text-input" name="stage" class="form-control" Required>
                                     </div>
                                 </div>
 
@@ -1013,7 +1016,7 @@ if (isset($_POST['newOrder'])) {
                                             No</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <h5 class="form-control-static"><?php echo $case['matterId'] ?></h5>
+                                        <h5 class="form-control-static"><?php echo $case['suitNo'] ?></h5>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1021,7 +1024,7 @@ if (isset($_POST['newOrder'])) {
                                         <label for="subject" class=" form-control-label">Subject</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="subject" class="form-control">
+                                        <input type="text" id="text-input" name="subject" class="form-control" Required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1076,7 +1079,7 @@ if (isset($_POST['newOrder'])) {
                                             No</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <h5 class="form-control-static"><?php echo $case['matterId'] ?></h5>
+                                        <h5 class="form-control-static"><?php echo $case['suitNo'] ?></h5>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1084,7 +1087,7 @@ if (isset($_POST['newOrder'])) {
                                         <label for="appName" class=" form-control-label">Application Name</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="appName" class="form-control">
+                                        <input type="text" id="text-input" name="appName" class="form-control" Required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1092,7 +1095,7 @@ if (isset($_POST['newOrder'])) {
                                         <label for="filedBy" class=" form-control-label">Filed By</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="filedBy" class="form-control">
+                                        <input type="text" id="text-input" name="filedBy" class="form-control" Required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1100,7 +1103,8 @@ if (isset($_POST['newOrder'])) {
                                         <label for="dateFiled" class=" form-control-label">Date Filed</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="date" id="date-input" name="dateFiled" class="form-control">
+                                        <input type="date" id="date-input" name="dateFiled" class="form-control"
+                                            Required>
                                     </div>
                                 </div>
 
@@ -1142,7 +1146,7 @@ if (isset($_POST['newOrder'])) {
                                             No</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <h5 class="form-control-static"><?php echo $case['matterId'] ?></h5>
+                                        <h5 class="form-control-static"><?php echo $case['suitNo'] ?></h5>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1158,7 +1162,7 @@ if (isset($_POST['newOrder'])) {
                                         <label for="filedBy" class=" form-control-label">File Name</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="file" id="file-input" name="file" class="form-control">
+                                        <input type="file" id="file-input" name="file" class="form-control" Required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1166,7 +1170,8 @@ if (isset($_POST['newOrder'])) {
                                         <label for="dateFiled" class=" form-control-label">Date Filed</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="date" id="date-input" name="dateFiled" class="form-control">
+                                        <input type="date" id="date-input" name="dateFiled" class="form-control"
+                                            Required>
                                     </div>
                                 </div>
                                 <!-- hidden input to identify case -->
@@ -1199,7 +1204,7 @@ if (isset($_POST['newOrder'])) {
                                             No</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <h5 class="form-control-static"><?php echo $case['matterId'] ?></h5>
+                                        <h5 class="form-control-static"><?php echo $case['suitNo'] ?></h5>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1207,7 +1212,8 @@ if (isset($_POST['newOrder'])) {
                                         <label for="dateFiled" class=" form-control-label">Date Delivered</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="date" id="date-input" name="dateDelivered" class="form-control">
+                                        <input type="date" id="date-input" name="dateDelivered" class="form-control"
+                                            Required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1215,8 +1221,8 @@ if (isset($_POST['newOrder'])) {
                                         <label for="synopsis" class=" form-control-label">Synopsis</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="orderDesc" id="textarea-input" rows="9"
-                                            class="form-control"></textarea>
+                                        <textarea name="orderDesc" id="textarea-input" rows="9" class="form-control"
+                                            Required></textarea>
                                     </div>
                                 </div>
 

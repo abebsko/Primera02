@@ -311,7 +311,8 @@ if (isset($_POST['editCase'])) {
                                             //display matters
                                             $cases = getMatters();
                                             foreach ($cases as $aCase) {
-                                                $suitNo = $aCase['matterId'];
+                                                $matterId = $aCase['matterId'];
+                                                $suitNo = $aCase['suitNo'];
                                                 $title = $aCase['title'];
                                                 $manager = $aCase["name"];
                                                 $date = $aCase["dateCreated"];
@@ -321,7 +322,7 @@ if (isset($_POST['editCase'])) {
 
                                                 <tr>
                                                     <td><?php echo $suitNo; ?></td>
-                                                    <td><a href="case.php?case=<?php echo $suitNo ?>"> <?php echo $title; ?>
+                                                    <td><a href="case.php?case=<?php echo $matterId ?>"> <?php echo $title; ?>
                                                         </a></td>
                                                     <td><?php echo $client ?></td>
                                                     <td><?php if ($manager == "") {
@@ -343,13 +344,13 @@ if (isset($_POST['editCase'])) {
                                                         ?>
                                                         <td>
                                                             <div class="table-data-feature">
-                                                                <a href="editMatter.php?case=<?php echo $suitNo; ?>">
+                                                                <a href="editMatter.php?case=<?php echo $matterId; ?>">
                                                                     <button class="btn btn-secondary btn-sm"
                                                                         data-toggle="tooltip" data-placement="top" title="Edit">
                                                                         <i class="zmdi zmdi-edit"></i>
                                                                     </button>
                                                                 </a>
-                                                                <a href="matters.php?delMatter=<?php echo $suitNo; ?>"
+                                                                <a href="matters.php?delMatter=<?php echo $matterId; ?>"
                                                                     onclick='return confirm("Are you sure you want to delete?")'>
                                                                     <button class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                                         data-placement="top" title="Delete">
@@ -357,13 +358,13 @@ if (isset($_POST['editCase'])) {
                                                                     </button> </a>
 
                                                                 <?php if ($status == 1) { ?>
-                                                                    <a href="matters.php?caseClose=<?php echo $suitNo; ?>">
+                                                                    <a href="matters.php?caseClose=<?php echo $matterId; ?>">
                                                                         <button class="btn btn-primary btn-sm" data-toggle="tooltip"
                                                                             data-placement="top" title="Close">
                                                                             <i class="zmdi zmdi-check-square"></i>
                                                                         </button> </a>
                                                                 <?php } else { ?>
-                                                                    <a href="matters.php?caseOpen=<?php echo $suitNo; ?>">
+                                                                    <a href="matters.php?caseOpen=<?php echo $matterId; ?>">
                                                                         <button class="btn btn-primary btn-sm" data-toggle="tooltip"
                                                                             data-placement="top" title="Open">
                                                                             <i class="zmdi zmdi-check-square"></i>
@@ -416,7 +417,7 @@ if (isset($_POST['editCase'])) {
                                             No</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="suitNo" class="form-control">
+                                        <input type="text" id="text-input" name="suitNo" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -425,7 +426,7 @@ if (isset($_POST['editCase'])) {
                                             Title</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="title" class="form-control">
+                                        <input type="text" id="text-input" name="title" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -476,8 +477,8 @@ if (isset($_POST['editCase'])) {
                                             to</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="manager" id="select" class="form-control">
-                                            <option value="null">Select Manager</option>
+                                        <select name="manager" id="select" class="form-control" required>
+                                            <option value="NULL">Select Manager</option>
                                             <?php
                                             //code to display users
                                             $allUsers = getAllUsers();
@@ -491,7 +492,7 @@ if (isset($_POST['editCase'])) {
 
                                     </div>
                                 </div>
-                                <div class="row form-group">
+                                <!-- <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="hearingDate" class=" form-control-label">Hearing
                                             Date</label>
@@ -508,7 +509,7 @@ if (isset($_POST['editCase'])) {
                                     <div class="col-12 col-md-9">
                                         <input type="text" id="text-input" name="hearingStage" class="form-control">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <input type="submit" value="Submit" name="createMatter" class="btn btn-primary">
                                 <!-- <button class="btn btn-danger btn-sm" onclick=closeMattersForm()>
@@ -525,135 +526,7 @@ if (isset($_POST['editCase'])) {
                 </div>
             </div>
             <!-- end modal scroll -->
-            <!-- modal Create Matter -->
-            <div class="modal fade" id="scrollmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="scrollmodalLabel">Add New Matter</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="matters.php" method="post" enctype="multipart/form-data"
-                                class="form-horizontal">
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="suitNo" class=" form-control-label">Suit
-                                            No</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="suitNo" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="title" class=" form-control-label">Case
-                                            Title</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="title" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="client" class=" form-control-label">Client</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="client" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="court" class=" form-control-label">Court</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="court" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="judge" class=" form-control-label">Judge</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="judge" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="category" class=" form-control-label">Category</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="category" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="Details" class=" form-control-label">Case
-                                            Summary</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <textarea name="caseSummary" id="textarea-input" rows="9"
-                                            class="form-control"></textarea>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="assigned" class=" form-control-label">Assigned
-                                            to</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <select name="manager" id="select" class="form-control">
-                                            <option value="null">Select Manager</option>
-                                            <?php
-                                            //code to display users
-                                            $allUsers = getAllUsers();
-                                            foreach ($allUsers as $aUser) {
-                                                $uId = $aUser["id"];
-                                                $name = $aUser["name"];
-                                                ?>
-                                                <option value="<?php echo $uId ?>"><?php echo $name ?></option>
-                                            <?php } ?>
-                                        </select>
 
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="hearingDate" class=" form-control-label">Hearing
-                                            Date</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="date" id="date-input" name="hearingDate" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="hearingStage" class=" form-control-label">Stage of Next
-                                            Hearing</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="hearingStage" class="form-control">
-                                    </div>
-                                </div>
-
-                                <input type="submit" value="Submit" name="createMatter" class="btn btn-primary">
-                                <!-- <button class="btn btn-danger btn-sm" onclick=closeMattersForm()>
-                                                <i class="fa fa-ban"></i> Cancel
-                                            </button> -->
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            </form>
-                        </div>
-                        <!-- <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary">Confirm</button>
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-            <!-- end modal scroll -->
         </div>
         <!-- END PAGE CONTAINER-->
     </div>

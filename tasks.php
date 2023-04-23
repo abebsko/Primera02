@@ -317,8 +317,8 @@ if (isset($_GET['complete'])) {
                                     <label for="suitNo" class=" form-control-label">Associated Matter</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <select name="case" id="select" class="form-control">
-                                        <option value="null">Select Case</option>
+                                    <select name="case" id="select" class="form-control" required>
+                                        <option value="NULL">Select Case</option>
                                         <?php
                                         //code to call cases managed by user
                                         $cases = getMatters();
@@ -339,7 +339,7 @@ if (isset($_GET['complete'])) {
                                     <label for="subject" class=" form-control-label">Subject</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" id="text-input" name="subject" class="form-control">
+                                    <input type="text" id="text-input" name="subject" class="form-control" Required>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -347,7 +347,7 @@ if (isset($_GET['complete'])) {
                                     <label for="dueDate" class=" form-control-label">Due Date</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="date" id="date-input" name="due" class="form-control">
+                                    <input type="date" id="date-input" name="due" class="form-control" required>
                                 </div>
                             </div>
 

@@ -62,7 +62,7 @@ $case = getCase();
                       </div>
                       <div class="col-12 col-md-9">
                         <input type="text" id="text-input" name="suitNo" class="form-control"
-                          value="<?php echo $case['matterId'] ?>">
+                          value="<?php echo $case['suitNo'] ?>">
                       </div>
                     </div>
                     <div class="row form-group">
@@ -152,24 +152,7 @@ $case = getCase();
                         <i class="fa fa-ban"></i> Cancel
                       </button></a>
                   </form>
-
-
-
                 </div>
-                <!-- <div class="card-footer">
-                  <a href="#">
-                    <button type="submit" class="btn btn-primary btn-sm">
-                      <i class="fa fa-dot-circle-o"></i> Submit
-                    </button>
-                  </a>
-                  <a href="#">
-                    <button type="reset" class="btn btn-danger btn-sm">
-                      <i class="fa fa-ban"></i> Cancel
-                    </button>
-                  </a>
-
-
-                </div> -->
               </div>
             </div>
           </div>

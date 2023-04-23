@@ -59,7 +59,7 @@ $apps = getApplications();
                                                     No</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <h5 class="form-control-static"><?php echo $case['matterId'] ?></h5>
+                                                <h5 class="form-control-static"><?php echo $case['suitNo'] ?></h5>
                                             </div>
                                         </div>
                                         <div class="row form-group">
