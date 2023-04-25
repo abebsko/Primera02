@@ -6,11 +6,15 @@ $user = getUser();
 $tasks = getUserTasks();
 //call create task function
 if (isset($_POST['newTask'])) {
-    newTask();
+    newUserTask();
 }
 // call mark complete function
 if (isset($_GET['complete'])) {
-    markComplete();
+    markUserComplete();
+}
+
+if (isset($_GET['delUserTask'])) {
+    deleteUserTask();
 }
 ?>
 <!DOCTYPE html>
@@ -263,13 +267,12 @@ if (isset($_GET['complete'])) {
                                                                     class="time"><?php echo date('d-m-Y', strtotime($task['dueDate'])); ?></span>
                                                             </td>
                                                             <td> <a
-                                                                    href="tasks.php?case=<?php echo $task['matterId']; ?>&complete=<?php echo $task['taskId'] ?>">
+                                                                    href="tasks.php?complete=<?php echo $task['taskId'] ?>">
                                                                     <button class="btn btn-success btn-sm" data-toggle="tooltip"
                                                                         data-placement="top" title="Mark Complete">
                                                                         <i class="zmdi zmdi-check-square"></i>
                                                                     </button></a> 
-                                                                <a href="tasks.php?case=<?php echo $task['matterId'];
-                                                                ; ?>&delTask=<?php echo $task['taskId'] ?>"
+                                                                <a href="tasks.php?delUserTask=<?php echo $task['taskId'] ?>"
                                                                     onclick='return confirm("Are you sure you want to delete?")'>
                                                                     <button class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                                         data-placement="top" title="Delete">
@@ -325,7 +328,7 @@ if (isset($_GET['complete'])) {
                                         foreach ($cases as $case) {
                                             $mId = $case["matterId"];
                                             $name = $case["title"];
-                                            if ($case['manager'] == $user['id']) {
+                                            if ($case['manager'] == $user['id'] && $case['matterStatus'] == 1) {
                                                 ?>
                                                 <option value="<?php echo $mId ?>"><?php echo $name ?></option>
                                             <?php }
@@ -358,9 +361,7 @@ if (isset($_GET['complete'])) {
                                 <div class="col-12 col-md-9">
                                     <textarea name="desc" id="textarea-input" rows="9" class="form-control"></textarea>
                                 </div>
-                            </div>
-                            <!-- hidden input to identify case
-                            <input type="hidden" name="case" value="<?php echo $case['matterId']; ?>"> -->
+                            </div>                           
                             <input type="submit" value="Submit" name="newTask" class="btn btn-primary">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         </form>

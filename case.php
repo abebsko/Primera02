@@ -952,10 +952,10 @@ if (isset($_POST['newOrder'])) {
                                         <label for="lhearingDate" class=" form-control-label">Last Hearing Date</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <!-- <input type="date" id="date-input" name="lhDate" class="form-control" Required
-                                            value=""> -->
-                                        <input type="text" id="text-input" name="lhDate" class="form-control" Required
-                                            value="<?php echo date('d-m-Y', strtotime($lhDate['nextHearingDate'])); ?>">
+                                        <h5 class="form-control-static">
+                                            <?php echo date('d-m-Y', strtotime($lhDate['nextHearingDate'])); ?></h5>
+                                        <input type="hidden" id="date-input" name="lhDate" class="form-control"
+                                            value="<?php echo $lhDate['nextHearingDate']; ?>">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -1051,10 +1051,7 @@ if (isset($_POST['newOrder'])) {
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             </form>
                         </div>
-                        <!-- <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                                            <button type="button" class="btn btn-primary">Confirm</button>
-                                                                        </div> -->
+
                     </div>
                 </div>
             </div>

@@ -238,7 +238,7 @@ $managers = getManagerCount();
                             <div class="col-lg-6">
                                 <div class="au-card m-b-30">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-40">Open v. Closed Matters</h3>
+                                        <h3 class="title-2 m-b-40">Open and Closed Matters</h3>
                                         <canvas id="mybarChart"></canvas>
                                     </div>
                                 </div>

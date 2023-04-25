@@ -158,16 +158,19 @@ function createHearing()
     $lHr = $_POST["lhDate"];
     $nHr = $_POST["nhearingDate"];
     $stage = $_POST["stage"];
-
-    //create new hearing
-    $insert = "INSERT INTO hearings (matterId,lastHearingDate,nextHearingDate,stageOfNextHearing,notes) 
-        VALUES('$matterId',' $lHr','$nHr','$stage',' $note')";
-    if (mysqli_query($db, $insert)) {
-        header("Location: case.php?case=$matterId");
+    //new hearing date must be later than lasthr
+    if ($nHr < $lHr) {
+        echo "<script> alert('Failed:New Hearing Date must be later than last hearing date') </script>";
     } else {
-        echo "<script> alert('Failed') </script>";
+        //create new hearing
+        $insert = "INSERT INTO hearings (matterId,lastHearingDate,nextHearingDate,stageOfNextHearing,notes) 
+        VALUES('$matterId','$lHr','$nHr','$stage',' $note')";
+        if (mysqli_query($db, $insert)) {
+            header("Location: case.php?case=$matterId");
+        } else {
+            echo "<script> alert('Failed') </script>";
+        }
     }
-
     return;
 }
 
@@ -183,6 +186,25 @@ function newTask()
     $sql = "INSERT INTO tasks (matterId,taskName,details,dueDate) VALUES('$matterId','$subject','$desc','$due')";
     if (mysqli_query($db, $sql)) {
         header("Location: case.php?case=$matterId");
+    } else {
+        echo "<script> alert('Failed') </script>";
+    }
+
+    return;
+}
+
+function newUserTask()
+{
+    global $db;
+    $matterId = $_POST["case"];
+    $subject = $_POST["subject"];
+    $due = $_POST["due"];
+    $desc = $_POST["desc"];
+
+    //create new task
+    $sql = "INSERT INTO tasks (matterId,taskName,details,dueDate) VALUES('$matterId','$subject','$desc','$due')";
+    if (mysqli_query($db, $sql)) {
+        header("Location: tasks.php");
     } else {
         echo "<script> alert('Failed') </script>";
     }
@@ -449,13 +471,29 @@ function deleteTask()
 
     if ($deleteQueryResult) {
         header("Location: case.php?case=$caseid");
-        // echo "<script> window.open('matters.php?deleted=matter has been deleted','_self') </script>";  
     } else {
         echo "<script> alert('Unsuccessful')</script>";
     }
     exit();
     // return;
 }
+
+function deleteUserTask()
+{
+    global $db;
+    $tid = $_GET['delUserTask'];
+    $deleteQuery = "DELETE from tasks WHERE taskId= '$tid'";
+    $deleteQueryResult = mysqli_query($db, $deleteQuery);
+
+    if ($deleteQueryResult) {
+        header("Location: tasks.php");
+    } else {
+        echo "<script> alert('Unsuccessful')</script>";
+    }
+    exit();
+    // return;
+}
+
 
 function deleteApp()
 {
@@ -541,6 +579,20 @@ function markComplete()
     $stmt = mysqli_query($db, $sql);
     if ($stmt) {
         header("Location:case.php?case=$caseid");
+    } else {
+        echo "<script> alert('Unsuccessful')</script>";
+    }
+}
+
+function markUserComplete()
+{
+    global $db;
+    // $caseid = $_GET['case'];
+    $tid = $_GET['complete'];
+    $sql = "UPDATE tasks SET taskStatus = 0, dateCompleted = CURRENT_TIMESTAMP() WHERE taskId = '$tid'";
+    $stmt = mysqli_query($db, $sql);
+    if ($stmt) {
+        header("Location:tasks.php");
     } else {
         echo "<script> alert('Unsuccessful')</script>";
     }
